@@ -134,7 +134,7 @@ class Phrase
     # initialization occurs here
     def self.load(words_path = WORDS_PATH, rhymes_path = RHYMES_PATH, multiple_pronunciations_path = MULTIPLES_PATH)
       return if @@LOADED
-      File.open(words_path, "r") do |lines|
+      File.open(File.expand_path("../#{words_path}", __FILE__), "r") do |lines|
         while (line = lines.gets)
           parts = line.split(" ");
           pronunciation_id = parts[0]
@@ -144,8 +144,8 @@ class Phrase
           @@PRONUNCIATIONS[pronunciation_id] = Pronunciation.new(word, pronunciation_id, num_syllables, rhyme_key)
         end
       end
-
-      File.open(multiple_pronunciations_path, "r") do |lines|
+      
+      File.open(File.expand_path("../#{multiple_pronunciations_path}", __FILE__), "r") do |lines|
         while (line = lines.gets)
           pronunciations = line.split(" ");
           word = pronunciations.slice!(0)
@@ -157,7 +157,7 @@ class Phrase
         end
       end
 
-      File.open(rhymes_path, "r") do |lines|
+      File.open(File.expand_path("../#{rhymes_path}", __FILE__), "r") do |lines|
         while (line = lines.gets)
           parts = line.split(" ");
           rhyme_key = parts.slice(0)
