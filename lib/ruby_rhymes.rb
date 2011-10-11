@@ -1,5 +1,5 @@
 # RubyRhymes is meant to facilitate the creation of automated poetry  
-# Authors::    Vlad Shulman (vshulman@github) and Thomas Kleibus (thomas-kielbus@github)
+# Authors::    Vlad Shulman (vshulman@github) and Thomas Kielbus (thomas-kielbus@github)
 # License::   Distributes under the same terms as Ruby
 
 # this class is the gateway to generating exciting poetry. Use it like this:
