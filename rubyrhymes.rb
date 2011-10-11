@@ -1,8 +1,8 @@
-# TODO: about
-# Authors::    Vlad Shulman (vladshulman) and Thomas Kleibus
+# RubyRhymes is meant to facilitate the creation of automated poetry  
+# Authors::    Vlad Shulman (vshulman@github) and Thomas Kleibus (thomas-kielbus@github)
 # License::   Distributes under the same terms as Ruby
 
-# This class wraps a word 
+# this class is the gateway to generating exciting poetry
 class Phrase
   def initialize(phrase)
     @phrase_tokens = Phrase.clean_and_tokenize(phrase)
@@ -10,57 +10,42 @@ class Phrase
     # [[p1a,p1b],[p2],p3]
     @pronunciations = @phrase_tokens.map{|pt| Pronunciations.get_pronunciations(pt)} #pronunciation objects
     @last_word_pronunciation = @pronunciations.last
-    
-    # should go through all pronunciations
   end
   
+  # returns the rhyme keys associated with this word (useful in matching with other words to see if they rhyme)
   def rhyme_keys
     @last_word_pronunciation.map(&:rhyme_key).compact||[]
   end
   
+  # returns the first rhyme key or nil
   def rhyme_key
     rhyme_keys.first
   end
   
-  # returns the number of syllables
+  # returns the number of syllables in the phrase
   def syllables
     @pronunciations.map{|p| p.first.num_syllables}.inject(:+)
-    
-    # code below will return an Array of syllable counts (in case > 0 words in the phrase have >1 syllable counts depending on pronunciation)
-    # this seems to be overkill - haven't found many cases where different pronunciations => different syllable counts
-    # arr = [0]
-    # temp_r = []
-    # @pronunciations.each do |pronunciation_arr| # for each word, we have an array of pronunciations
-    #   pronunciation_arr.map(&:num_syllables).each do |ns|
-    #     arr.each do |o|
-    #       p "word: #{pronunciation_arr.first.word}, count #{ns}, current count: #{o}"
-    #       temp_r << o + ns
-    #     end
-    #   end
-    #   arr = temp_r.uniq
-    #   temp_r = []
-    # end
-    # arr
   end
   
-  # is the last word here a dictionary word?
+  # returns whether the last word in the phrase a dictionary word (useful to know before calling rhymes and rhyme_keys)
   def dict?
     @last_word_pronunciation.first.dict?
   end
   
+  # returns a map from rhyme key to a list of rhyming words in that key
   def rhymes
     @rhymes = load_rhymes if @rhymes.nil?
     @rhymes
   end
   
   # return a flat array of rhymes, rather than by pronunciation
-  # TODO: where to downcase?
   def flat_rhymes
     rhymes.empty? ? [] : @rhymes.values.flatten
   end
 
   private
   
+  # lazy loading action
   def load_rhymes
     return {} if !@last_word_pronunciation.first.dict?
       
@@ -71,10 +56,12 @@ class Phrase
     rhymes
   end
   
+  # we upcase because our dictionary files are upcased
   def self.clean_and_tokenize(phrase)
     phrase.upcase.gsub(/[^A-Z ]/,"").split
   end
   
+  # Pronunciations does the heavy lifting, interfacing with the mythical text file of doom
   class Pronunciations
     require 'syllable_arrays'
     
@@ -144,6 +131,7 @@ class Phrase
       syllables = (syllables == 0) ? 1 : syllables
     end
     
+    # initialization occurs here
     def self.load(words_path = WORDS_PATH, rhymes_path = RHYMES_PATH, multiple_pronunciations_path = MULTIPLES_PATH)
       return if @@LOADED
       File.open(words_path, "r") do |lines|
@@ -182,6 +170,7 @@ class Phrase
     end
   end
   
+  # a container of word, pronunciation_id, num_syllables, and rhyme_key
   class Pronunciation
     attr_reader :word, :pronunciation_id, :num_syllables, :rhyme_key
 
