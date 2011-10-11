@@ -14,7 +14,8 @@ RubyRhymes is a gem that makes auto-generating terrible poetry a breeze. You use
 Tested with Ruby 1.8.7
 
 ## Installation
-TODO
+
+    gem install ruby_rhymes
   
 ## Usage
 The easiest thing to do is embrace the String abuse:
@@ -65,6 +66,7 @@ In essence we have three dictionaries available
 - _multiple.txt_ : Word to pronunciation-encoding (ex. TOMATO => TOMATO TOMATO(2))
 - _words.txt_ : Pronunciation-encoding to syllable rhyme key and syllable count (ex. TOMATO => \2R 3)
 - _rhymes.txt_ : Rhyme-key to pronunciation-encodings of words that rhyme with it (ex. \2R => POTATO SAITO TOMATO)
-from here on, it's fairly intuative what needs to be done. `multiple.txt` is only has keys when the word actually has multiple pronunciations, so _CAT_ will yield nothing there, meaning we can continue to to check in `words.txt`.
+
+from here on, it's fairly intuitive what needs to be done. `multiple.txt` is only has keys when the word actually has multiple pronunciations, so _CAT_ will yield nothing there, meaning we can continue to check in `words.txt`.
 
 ## TODO

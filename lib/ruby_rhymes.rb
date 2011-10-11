@@ -2,7 +2,14 @@
 # Authors::    Vlad Shulman (vshulman@github) and Thomas Kleibus (thomas-kielbus@github)
 # License::   Distributes under the same terms as Ruby
 
-# this class is the gateway to generating exciting poetry
+# this class is the gateway to generating exciting poetry. Use it like this:
+#
+# >> phrase = "to be or not to beer".to_phrase
+# >> phrase.flat_rhymes
+# => ["adhere", "alvear", "amir", ...]
+# >> "to be or not to beer".to_phrase.syllables
+# => 6
+
 class Phrase
   def initialize(phrase)
     @phrase_tokens = Phrase.clean_and_tokenize(phrase)
