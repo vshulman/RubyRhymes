@@ -54,6 +54,9 @@ If you're not afraid of multiple pronunciations, you can call `.rhymes` instead 
     => {"+I"=>["anticrime", "beim", "chime", "climb", "clime", "crime", ...]}
     
 ## Props
+
+- [Thomas](https://github.com/thomas-kielbus, "github"), the co-author
+
 - The dictionaries, which is really what matters, came from [Brian Langenberger](http://rhyme.sourceforge.net/index.html "Rhyme Dictionary"), whose work was based on a [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict CMU Dictionary).
 
 - The syllable counter for words that aren't in the dictionary comes from the source made available by [Russell McVeigh](http://www.russellmcveigh.info/content/html/syllablecounter.php "PHP Syllable Counter"). I just ported the PHP.
