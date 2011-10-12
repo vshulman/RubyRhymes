@@ -1,10 +1,4 @@
 # RubyRhymes
-    RubyRhymes is a gem quite sublime  
-    for poets who haven't much time  
-    you provide it a string  
-    then it does its own thing  
-    and returns a number of rhymes  
-	
 RubyRhymes is a gem that makes auto-generating terrible poetry a breeze. You use it roughly like so:
 
     >> "RubyGems... is a gem quite sublime!".to_phrase.flat_rhymes
