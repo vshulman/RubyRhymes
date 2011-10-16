@@ -50,6 +50,11 @@ class Phrase
     rhymes.empty? ? [] : @rhymes.values.flatten
   end
 
+  # returns the last word in the phrase (the one used for rhyming)
+  def last_word
+    @last_word_pronunciation.first.word.downcase
+  end
+  
   private
   
   # lazy loading action
@@ -65,7 +70,7 @@ class Phrase
   
   # we upcase because our dictionary files are upcased
   def self.clean_and_tokenize(phrase)
-    phrase.upcase.gsub(/[^A-Z ]/,"").split
+    phrase.upcase.gsub(/[^A-Z ']/,"").split
   end
   
   # Pronunciations does the heavy lifting, interfacing with the mythical text file of doom

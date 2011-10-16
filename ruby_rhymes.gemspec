@@ -6,6 +6,6 @@ Gem::Specification.new do |s|
   s.description = "A gem for rhyming words and counting syllables on phrases"
   s.authors     = ["Vlad Shulman", "Thomas Kielbus"]
   s.email       = 'vladshulman@gmail.com'
-  s.files       = Dir.glob("{lib,doc}/**/*") + %w(README.md README.rdoc)
+  s.files       = Dir.glob("{lib,doc}/**/*") + %w(README.md)
   s.homepage    = 'https://github.com/vshulman/RubyRhymes'
 end
